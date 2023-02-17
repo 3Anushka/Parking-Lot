@@ -2,14 +2,18 @@ package services
 
 import models.Receipt
 import models.Ticket
+import java.time.LocalDateTime
 
 class ReceiptGenerator {
-    val receipt = Receipt()
-    val ticket = Ticket()
-    fun generateReceipt():Receipt{
-        var receiptNumber = receipt.receiptNumber++
-        var entryTimeOfVehicle = ticket.entryTimeOfVehicle
-        var entryDateOfVehicle = ticket.entryDateOfVehicle
+
+
+    private val feeCalculator = FeeCalculator()
+    fun generateReceipt(ticket: Ticket):Receipt{
+        val receipt = Receipt()
+        receipt.receiptNumber++
+       ticket.entryTimeOfVehicle = LocalDateTime.now()
+        val fee = feeCalculator.calculateFee(receipt.exitTimeOfVehicle,ticket.entryTimeOfVehicle)
+        receipt.fee=fee
         return receipt
     }
 }
