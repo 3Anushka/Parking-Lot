@@ -1,19 +1,19 @@
 package services
 
-import models.Receipt
 import models.Ticket
 import repo.Repo
 import java.time.LocalDateTime
 
-class TicketGenerator() {
-    fun generateTicket(slotNumber: Int): Ticket{
-        var ticket:Ticket=Ticket()
+class TicketGenerator {
+    fun generateTicket(slotNumber: Int): Ticket {
+        val ticket = Ticket()
+
 
         ticket.ticketNumber++
         ticket.entryTimeOfVehicle = LocalDateTime.now()
+        ticket.slotNumber = slotNumber
 
-        Repo.allTickets.put(ticket.ticketNumber,Ticket())
-
+        Repo.allTickets[ticket.ticketNumber] = Ticket()
 
         return ticket
     }

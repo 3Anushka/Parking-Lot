@@ -7,22 +7,21 @@ import repo.Repo
 class ParkingLot {
     private val ticketGenerator = TicketGenerator()
     private val receiptGenerator = ReceiptGenerator()
-    private val receipt = Receipt()
-    private var ticket = Ticket()
     private val slot = Slot()
 
+    fun parkVehicle(): Ticket? {
 
-    fun parkVehicle(): Ticket {
-        if (!slot.isFull()) {
-            val slotNumber = slot.bookSlot()
-            ticket = ticketGenerator.generateTicket(slotNumber)
-        }
-        return ticket
+        if (slot.isFull())
+            return null
+
+        val slotNumber = slot.bookSlot()
+        return ticketGenerator.generateTicket(slotNumber)
+
     }
 
-    fun unparkVehicle(ticketNo:Int): Receipt {
+    fun unParkVehicle(ticketNo: Int): Receipt {
 
-        val ticket= Repo.getTicketWithNo(ticketNo)
+        val ticket = Repo.getTicketWithNo(ticketNo)
         val vehicleReceipt = receiptGenerator.generateReceipt(ticket)
 
         slot.unBookingSlot(vehicleReceipt.slotNumber)
