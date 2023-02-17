@@ -2,6 +2,7 @@ package services
 
 import models.Receipt
 import models.Ticket
+import repo.Repo
 
 class ParkingLot {
     private val ticketGenerator = TicketGenerator()
@@ -19,9 +20,12 @@ class ParkingLot {
         return ticket
     }
 
-    fun unparkVehicle(): Receipt {
-        val vehicleReceipt = receiptGenerator.generateReceipt()
-        slot.unBookingSlot(receipt.slotNumber)
+    fun unparkVehicle(ticketNo:Int): Receipt {
+
+        val ticket= Repo.getTicketWithNo(ticketNo)
+        val vehicleReceipt = receiptGenerator.generateReceipt(ticket)
+
+        slot.unBookingSlot(vehicleReceipt.slotNumber)
         return vehicleReceipt
     }
 }

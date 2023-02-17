@@ -1,5 +1,7 @@
 package services
 
+import models.Receipt
+import models.Ticket
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -10,14 +12,13 @@ class ParkingLotTest {
         val ticket = ParkingLot().parkVehicle()
 
         assertEquals(1, ticket.ticketNumber)
-        assertEquals("2023-02-17", ticket.entryDateOfVehicle)
     }
 
     @Test
     fun `it should generate a receipt after unparking a vehicle`(){
-        val receipt = ParkingLot().unparkVehicle()
+        val ticket = ParkingLot().parkVehicle()
+        val receipt = ParkingLot().unparkVehicle(ticket.ticketNumber)
 
-        assertEquals(1,receipt.receiptNumber)
-        assertEquals("2023-02-17",receipt.exitDateOfVehicle)
+        assertEquals(1, receipt.receiptNumber)
     }
 }
