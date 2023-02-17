@@ -1,13 +1,11 @@
 package services
 
-import models.Receipt
-import models.Ticket
 import java.time.Duration
 import java.time.LocalDateTime
+import kotlin.math.ceil
 
 class FeeCalculator {
-    fun calculateFee(exitTime:LocalDateTime,entryTime: LocalDateTime) : Long{
-        val fee = Duration.between(entryTime,exitTime).toHours()*10
-        return fee
+    fun calculateFee(exitTime: LocalDateTime, entryTime: LocalDateTime): Long {
+        return ceil(Duration.between(entryTime, exitTime).toMinutes() / 60.0).toLong() * 10
     }
 }

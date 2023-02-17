@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 class Receipt(
     var receiptNumber: Int = 0,
     var slotNumber: Int = 0,
-    var entryTimeOfVehicle: LocalDateTime = LocalDateTime.now(),
     var exitTimeOfVehicle: LocalDateTime = LocalDateTime.now(),
-    var fee: Long = 0)
+    var fee: Long = 0
+)
 

@@ -27,7 +27,7 @@ class Slot(
 
 
     fun unBookingSlot(slotNumber: Int) {
-        parkedVehicle[slotNumber]=false
+        parkedVehicle[slotNumber] = false
         available++
 
     }
