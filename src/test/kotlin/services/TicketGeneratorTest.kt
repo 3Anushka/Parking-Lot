@@ -8,8 +8,8 @@ class TicketGeneratorTest {
     @Test
     fun `it should generate a ticket`() {
         val ticketGenerate = TicketGenerator()
-        val ticket = ticketGenerate.generateTicket(Ticket().slotNumber)
-
+        val ticket = ticketGenerate.generateTicket(1)
         assertEquals(1, ticket.ticketNumber)
+
     }
 }

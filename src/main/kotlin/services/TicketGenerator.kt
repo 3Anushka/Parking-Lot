@@ -5,10 +5,11 @@ import repo.Repo
 import java.time.LocalDateTime
 
 class TicketGenerator {
+
+
+    val ticket = Ticket()
+
     fun generateTicket(slotNumber: Int): Ticket {
-        val ticket = Ticket()
-
-
         ticket.ticketNumber++
         ticket.entryTimeOfVehicle = LocalDateTime.now()
         ticket.slotNumber = slotNumber
