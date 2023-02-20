@@ -1,5 +1,6 @@
 package services
 
+import exceptions.SlotFullException
 import models.Receipt
 import models.Ticket
 import repo.Repo
@@ -7,14 +8,15 @@ import repo.Repo
 class ParkingLot {
     private val ticketGenerator = TicketGenerator()
     private val receiptGenerator = ReceiptGenerator()
-    private val slot = Slot()
+    private val slot = Slots()
 
-    fun parkVehicle(): Ticket? {
+    fun parkVehicle(): Ticket {
 
-        if (slot.isFull())
-            return null
-
+        if (slot.isFull()) {
+            throw SlotFullException("Slot is Full cannot park Vehicle")
+        }
         val slotNumber = slot.bookSlot()
+
         return ticketGenerator.generateTicket(slotNumber)
 
     }
@@ -24,7 +26,7 @@ class ParkingLot {
         val ticket = Repo.getTicketWithNo(ticketNo)
         val vehicleReceipt = receiptGenerator.generateReceipt(ticket)
 
-        slot.unBookingSlot(vehicleReceipt.slotNumber)
+        slot.freeBookingSlot(vehicleReceipt.slotNumber)
         return vehicleReceipt
     }
 }
